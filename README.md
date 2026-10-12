@@ -20,7 +20,7 @@ Lors de mes premières exécutions, le test **Connexion valide** donnait des ré
 
 **Cause :** Robot Framework vérifiait la présence de la liste des produits avant que la page ne soit entièrement chargée.
 
-**Correction :** j'ai remplacé la vérification immédiate par une attente explicite :
+**Correction :** j'ai remplacé la vérification immédiate par une attente explicite:
 ```robotframework
 Wait Until Page Contains Element    id=inventory_container    timeout=10s
 ```

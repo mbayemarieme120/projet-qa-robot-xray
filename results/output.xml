@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5 (Python 3.15.0rc3 on win32)" generated="2026-10-12T15:36:04.644094" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\marie\OneDrive\Documents\GitHub\projet-qa-robot-jira\tests">
+<suite id="s1-s1" name="Login" source="C:\Users\marie\OneDrive\Documents\GitHub\projet-qa-robot-jira\tests\login.robot">
+<test id="s1-s1-t1" name="Connexion Valide" line="10">
+<kw name="Open Browser" owner="SeleniumLibrary" type="SETUP">
+<msg time="2026-10-12T15:36:05.570229" level="INFO">Opening browser 'chrome' to base url 'https://www.saucedemo.com'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-10-12T15:36:05.569449" elapsed="4.082582"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:09.657438" level="INFO">Typing text 'standard_user' into text field 'id=user-name'.</msg>
+<arg>id=user-name</arg>
+<arg>standard_user</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:09.655401" elapsed="0.389522"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:10.046527" level="INFO">Typing password into text field 'id=password'.</msg>
+<msg time="2026-10-12T15:36:10.116737" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=password</arg>
+<arg>secret_sauce</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:10.045816" elapsed="0.201625"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:10.250388" level="INFO">Clicking button 'id=login-button'.</msg>
+<arg>id=login-button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:10.249695" elapsed="0.204310"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=inventory_container</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2026-10-12T15:36:10.456196" elapsed="0.133417"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-10-12T15:36:10.592646" elapsed="2.681438"/>
+</kw>
+<status status="PASS" start="2026-10-12T15:36:05.566369" elapsed="7.708901"/>
+</test>
+<test id="s1-s1-t2" name="Connexion Mot De Passe Invalide" line="16">
+<kw name="Open Browser" owner="SeleniumLibrary" type="SETUP">
+<msg time="2026-10-12T15:36:13.283809" level="INFO">Opening browser 'chrome' to base url 'https://www.saucedemo.com'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-10-12T15:36:13.282474" elapsed="3.690848"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:16.975992" level="INFO">Typing text 'standard_user' into text field 'id=user-name'.</msg>
+<arg>id=user-name</arg>
+<arg>standard_user</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:16.974551" elapsed="0.397397"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:17.373775" level="INFO">Typing password into text field 'id=password'.</msg>
+<msg time="2026-10-12T15:36:17.456914" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=password</arg>
+<arg>mauvais_mdp</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:17.372891" elapsed="0.217716"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:17.592992" level="INFO">Clicking button 'id=login-button'.</msg>
+<arg>id=login-button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-10-12T15:36:17.591822" elapsed="0.207908"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-10-12T15:36:17.837952" level="INFO">Current page contains text 'Username and password do not match'.</msg>
+<arg>Username and password do not match</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-10-12T15:36:17.800478" elapsed="0.037710"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-10-12T15:36:17.839128" elapsed="2.778640"/>
+</kw>
+<status status="PASS" start="2026-10-12T15:36:13.278758" elapsed="7.340140"/>
+</test>
+<status status="PASS" start="2026-10-12T15:36:04.767275" elapsed="15.855443"/>
+</suite>
+<status status="PASS" start="2026-10-12T15:36:04.648911" elapsed="15.979492"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="2" fail="0" skip="0">Tests</stat>
+<stat name="Login" id="s1-s1" pass="2" fail="0" skip="0">Tests.Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

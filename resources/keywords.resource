@@ -22,3 +22,5 @@ Se Connecter En Tant Que
 Se Connecter Avec Un Compte Valide
     Se Connecter En Tant Que    ${USER_OK}    ${PASSWORD}
     Wait Until Page Contains Element    id=inventory_container    timeout=10s
+
+    

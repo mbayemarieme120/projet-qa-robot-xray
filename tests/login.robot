@@ -1,22 +1,23 @@
 *** Settings ***
-Library           SeleniumLibrary
-Test Setup        Open Browser    ${URL}    chrome
+Resource          ../resources/keywords.resource
+Test Setup        Ouvrir SauceDemo
 Test Teardown     Close All Browsers
-
-*** Variables ***
-${URL}    https://www.saucedemo.com
 
 *** Test Cases ***
 Connexion Valide
-    Input Text        id=user-name    standard_user
-    Input Password    id=password     secret_sauce
-    Click Button      id=login-button
-    Wait Until Page Contains Element    id=inventory_container    timeout=10s
+    Se Connecter Avec Un Compte Valide
 
 Connexion Mot De Passe Invalide
-    Input Text        id=user-name    standard_user
-    Input Password    id=password     mauvais_mdp
-    Click Button      id=login-button
+    Se Connecter En Tant Que    ${USER_OK}    mauvais_mdp
     Page Should Contain    Username and password do not match
 
-    
+Connexion Compte Bloque
+    Se Connecter En Tant Que    ${USER_LOCKED}    ${PASSWORD}
+    Page Should Contain    locked out
+
+Deconnexion
+    Se Connecter Avec Un Compte Valide
+    Click Button    id=react-burger-menu-btn
+    Wait Until Element Is Visible    id=logout_sidebar_link    timeout=10s
+    Click Link    id=logout_sidebar_link
+    Wait Until Element Is Visible    id=login-button    timeout=10s

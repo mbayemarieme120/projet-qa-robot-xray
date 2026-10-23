@@ -1,6 +1,11 @@
 # Projet QA: tests automatisés avec Robot Framework et Xray
 
-
+## Arborescence du projet
+```
+resources/    → mots-clés réutilisables
+tests/        → fichiers de tests (login, panier, checkout)
+results/      → rapports générés (non versionnés)
+```
 
 ## Outils utilisés
 - Robot Framework, SeleniumLibrary
@@ -8,7 +13,16 @@
 - Python
 
 ## Cas de test
+| ID | Cas de test | Fichier | Résultat attendu | Statut |
+|---|---|---|---|---|
 
+| 1 | Connexion valide | `login.robot` | La page des produits s'affiche | ✅ Passé |
+
+| 2 | Connexion avec mot de passe invalide | `login.robot` | Message d'erreur affiché | ✅ Passé |
+
+| 3 | Connexion avec un compte bloqué | `login.robot` | Message « locked out » affiché | ✅ Passé |
+
+| 4 | Déconnexion | `login.robot` | Retour à la page de connexion | ✅ Passé |
 
 ## Installation et lancement
 

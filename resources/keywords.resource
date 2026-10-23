@@ -11,6 +11,7 @@ ${PASSWORD}      secret_sauce
 *** Keywords ***
 Ouvrir SauceDemo
     Open Browser    ${URL}    ${BROWSER}
+    ...    options=add_argument("--incognito");add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False, "profile.password_manager_leak_detection": False})
     Wait Until Element Is Visible    id=login-button    timeout=10s
 
 Se Connecter En Tant Que

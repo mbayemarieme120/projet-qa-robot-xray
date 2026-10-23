@@ -1,10 +1,15 @@
 # Projet QA: tests automatisés avec Robot Framework et Xray
 
+Ce projet automatise des tests fonctionnels sur [SauceDemo](https://www.saucedemo.com), un site e-commerce de démonstration. Il couvre trois parcours : la connexion, le panier et la commande, soit 8 cas de test.
+
+Je l'ai réalisé pour me former à l'automatisation des tests : écrire des cas de test clairs, les automatiser avec Robot Framework et SeleniumLibrary, organiser le code de façon réutilisable, et analyser les échecs à partir des rapports. Issue d'une formation en biologie moléculaire et en data science (Master CCI, Lyon 1), j'y applique la même rigueur de protocole que celle du laboratoire : un cas de test, un résultat attendu, une vérification reproductible.
+
 ## Arborescence du projet
 ```
 resources/    → mots-clés réutilisables
 tests/        → fichiers de tests (login, panier, checkout)
 results/      → rapports générés (non versionnés)
+Images/
 ```
 
 ## Outils utilisés
@@ -28,8 +33,9 @@ results/      → rapports générés (non versionnés)
 
 | 6 | Retirer un produit du panier | `panier.robot` | Le compteur disparaît | ✅ Passé |
 
-## Installation et lancement
+| 7 | Commande complète | `checkout.robot` | Message « Thank you for your order » | ✅ Passé |
 
+| 8 | Checkout avec champ obligatoire vide | `checkout.robot` | Message « First Name is required » | ✅ Passé |
 
 ## Difficulté rencontrée: 
 1. un test instable:
@@ -63,7 +69,39 @@ La première attend l'apparition du bouton « Remove » avant de cliquer, la sec
 
 **Ce que j'en retiens :** un test automatisé s'exécute plus vite qu'un utilisateur. Il faut donc attendre explicitement chaque changement de la page dont l'étape suivante dépend.
 
+3. une fenêtre du navigateur qui perturbe les tests :
+
+Après avoir stabilisé les attentes, mes tests échouaient encore de façon intermittente (login, panier, checkout), avec des messages comme `Button with locator 'id=checkout' not found` ou `NoSuchWindowException: no such window`. Le code n'avait pas changé entre deux exécutions.
+
+**Diagnostic :** une capture d'écran prise pendant un lancement a montré la cause : après la connexion, Chrome affichait la fenêtre « Modifiez votre mot de passe », car le mot de passe de démonstration de SauceDemo figure dans une base de mots de passe compromis. Cette alerte n'apparaissait pas à chaque exécution, ce qui expliquait le caractère intermittent des échecs. Elle masquait la page et bloquait les clics de Robot.
+![Alerte Chrome sur les mots de passe](Images/alerte-chrome.png)
+
+**Correction :** j'ai modifié le mot-clé `Ouvrir SauceDemo` pour lancer Chrome en navigation privée, avec le gestionnaire de mots de passe et la détection de fuites désactivés :
+
+```robotframework
+Ouvrir SauceDemo
+    Open Browser    ${URL}    ${BROWSER}
+    ...    options=add_argument("--incognito");add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False, "profile.password_manager_leak_detection": False})
+    Wait Until Element Is Visible    id=login-button    timeout=10s
+```
+
+Comme tous les tests passent par ce mot-clé, la correction s'applique d'un seul coup à toute la suite.
+
+**Résultat :** les 8 tests ont été exécutés 3 fois de suite sans aucun échec.
+
+**Ce que j'en retiens :** un test peut échouer pour une raison extérieure à l'application et au code de test, ici une fenêtre du navigateur. Une capture d'écran au moment de l'échec permet d'identifier ce genre de cause bien plus vite que la lecture des logs seule. Avoir centralisé l'ouverture du site dans un mot-clé réutilisable a permis de corriger le problème en un seul endroit.
+
+
 ## Captures d'écran
 
+![Alerte Chrome sur les mots de passe](Images/alerte-chrome.png)
+
+## Bilan
+
+Les 8 tests s'exécutent et passent. Ce projet m'a surtout appris trois choses :
+
+- **Un test qui passe n'est pas forcément un test fiable.** Deux de mes tests ont échoué de façon intermittente parce que Robot Framework agissait plus vite que la page ne se chargeait. Je les ai stabilisés avec des attentes explicites (`Wait Until...`) à chaque changement de la page.
+- **Le code de test doit être maintenable.** En regroupant les actions répétées dans `resources/keywords.resource`, mes tests sont plus courts et un changement du site ne demande de corriger qu'un seul endroit.
+- **Il faut choisir ses cas de test.** J'ai retenu les cas qui couvrent des comportements différents (cas nominal, cas d'erreur) plutôt que de multiplier des tests redondants.
 
 

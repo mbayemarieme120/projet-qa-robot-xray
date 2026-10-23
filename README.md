@@ -96,6 +96,16 @@ Comme tous les tests passent par ce mot-clé, la correction s'applique d'un seul
 
 ![Alerte Chrome sur les mots de passe](Images/alerte-chrome.png)
 
+Capture 2 : le Test Execution SCRUM-35, lié au Test Plan SCRUM-28, avec output.xml en pièce jointe.
+![](Images/test-exé_lié_test_plan.png)
+Captures 3 et 4 : les 8 tests, tous PASSED, et la barre verte « Statut d’Exécution Global ».
+![](Images/tests-passed-1.png)
+![](Images/tests-passed-2.png)
+
+Les 8 cas de test sont formalisés dans Jira avec Xray, regroupés dans un Test Plan (SCRUM-28) et exécutés dans un Test Execution (SCRUM-35). Après exécution de la suite Robot Framework, j'ai reporté les résultats dans Xray et joint le rapport `output.xml` au ticket.
+
+L'import automatique du fichier de résultats via l'API Xray n'est pas encore en place : c'est une piste d'amélioration.
+
 ## Bilan
 
 Les 8 tests s'exécutent et passent. Ce projet m'a surtout appris trois choses :

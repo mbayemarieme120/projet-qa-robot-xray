@@ -5,10 +5,12 @@ Test Teardown     Close All Browsers
 
 *** Test Cases ***
 Ajouter Un Produit Au Panier
+    [Tags]    SCRUM-31
     Click Button    id=add-to-cart-sauce-labs-backpack
     Element Text Should Be    class=shopping_cart_badge    1
 
 Retirer Un Produit Du Panier
+    [Tags]    SCRUM-32
     Click Button    id=add-to-cart-sauce-labs-backpack
     Wait Until Element Is Visible    id=remove-sauce-labs-backpack    timeout=10s
     Click Button    id=remove-sauce-labs-backpack

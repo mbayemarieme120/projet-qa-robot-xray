@@ -5,6 +5,7 @@ Test Teardown     Close All Browsers
 
 *** Test Cases ***
 Commande Complete
+    [Tags]    SCRUM-33
     Click Button    id=add-to-cart-sauce-labs-backpack
     Click Link      class=shopping_cart_link
     Wait Until Element Is Visible    id=checkout    timeout=10s
@@ -19,6 +20,7 @@ Commande Complete
     Wait Until Page Contains    Thank you for your order    timeout=10s
 
 Checkout Avec Champ Obligatoire Vide
+    [Tags]    SCRUM-34
     Click Button    id=add-to-cart-sauce-labs-backpack
     Click Link      class=shopping_cart_link
     Wait Until Element Is Visible    id=checkout    timeout=10s
